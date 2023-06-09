@@ -54,7 +54,7 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(() => {
-        app.listen(PORT,hostName,() => console.log(`Server host: ${hostName}:${PORT}`));
+        app.listen(PORT,() => console.log(`Server host: ${hostName}:${PORT}`));
 
     })
     .catch((error) => console.log(`${error} did not connect`));
