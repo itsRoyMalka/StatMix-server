@@ -133,7 +133,14 @@ export const addEvent = async (req,res)=>{
 
         await genres.forEach(gen=> gen.counter = 0)
 
-        const exist = await Event.findOne({date})
+    
+        
+         const userEvents = await Promise.all(
+            user.events.map(eventId=> Event.findById(eventId))
+        )
+
+        //check only on user - CHANGE ME
+        const exist = await userEvents.find(event => event.data === date)
 
         if(exist){
             return res.status(400).json({message: "Already exist"})
