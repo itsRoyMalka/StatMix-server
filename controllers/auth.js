@@ -36,7 +36,7 @@ export const Login = async (req, res) =>{
                 }
 
 
-                res.cookie('token', token)
+                res.cookie('token', token, { maxAge: 900000,sameSite: 'none', secure: true})
 
                 res.status(201).json({user})
 
