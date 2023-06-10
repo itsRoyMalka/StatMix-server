@@ -38,7 +38,7 @@ export const Login = async (req, res) =>{
 
                 res.cookie('token', token, {sameSite: 'none', secure: true })
 
-                res.status(201).json({ user})
+                res.status(201).json({token, user})
 
             })
 
