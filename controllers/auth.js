@@ -36,7 +36,7 @@ export const Login = async (req, res) =>{
                 }
 
 
-                res.cookie('token', token, {domain: 'https://statmix-api.onrender.com',sameSite: 'none', secure: true })
+                res.cookie('token', token, {sameSite: 'none', secure: true })
 
                 res.status(201).json({ user})
 
