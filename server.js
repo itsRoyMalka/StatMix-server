@@ -30,7 +30,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
-    origin: 'https://statmix.onrender.com',
+    // origin: 'https://statmix.onrender.com' //production
+     origin: 'http://10.0.0.8:3000' //dev
 }));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
