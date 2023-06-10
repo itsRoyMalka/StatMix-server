@@ -7,7 +7,7 @@ import {
     deleteEvent,
     addGenre,
     editGenre,
-    deleteGenre, getUserGenres, getEvent, getLiveEvent, setEventStatus
+    deleteGenre, getUserGenres, getEvent, getLiveEvent, setEventStatus, searchEvent
 } from "../controllers/user.js";
 
 const router = express.Router()
@@ -20,6 +20,7 @@ router.get('/get-live-event', getLiveEvent)
 
 router.post('/add-event', addEvent)
 router.post('/add-genre', addGenre)
+router.post('/search-event', searchEvent)
 
 router.patch('/edit-event', editEvent)
 router.patch('/edit-genre', editGenre)

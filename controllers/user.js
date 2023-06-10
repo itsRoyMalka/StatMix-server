@@ -227,6 +227,34 @@ export const deleteEvent = async (req,res) =>{
 
 }
 
+export const searchEvent = async (req,res)=>{
+
+    try{
+
+        const params = req.body
+        const userId = req.user.id
+
+        const user = await User.findById(userId)
+
+        const userEvents = await Promise.all(
+            user.events.map(eventId=> Event.findById(eventId))
+        )
+
+
+        const filteredEvents = userEvents.filter(ev => {
+            return ev.name === params || ev.name.slice(0,params.length) === params
+
+        })
+
+
+        return res.status(200).json(userEvents)
+
+    }catch(error){
+        return res.status(500).json({error: error})
+    }
+
+}
+
 export const addGenre = async (req,res) =>{
 
     try{
