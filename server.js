@@ -28,10 +28,13 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
+
+const origin =
+
 app.use(cors({
     credentials: true,
-     origin: 'https://statmix.onrender.com' //production
-     //origin: 'http://10.0.0.8:3000' //dev
+     origin: (process.env.NODE_ENV === 'production' ? ('https://statmix.onrender.com') : ('http://10.0.0.8:3000'))
+
 }));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
