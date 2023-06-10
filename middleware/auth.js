@@ -4,7 +4,7 @@ export const verifyToken = async (req,res,next) =>{
 
 
     try {
-        const {token} = await req.body.token ||
+        const token = await req.body.token ||
         req.query.token ||
         req.headers['x-access-token'] ||
         req.cookies.token;
