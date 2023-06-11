@@ -126,6 +126,14 @@ export const addEvent = async (req,res)=>{
             return res.status(400).json({message: "name must be at least 2"})
         }
 
+        const now = new Date()
+
+        const nowDate = `${now.getFullYear()}-${now.getMonth()<10 && '0'}${now.getMonth()+1}-${now.getDate()-1}T${now.getHours()}:${now.getMinutes()}:00.000+00:00`
+
+        if(nowDate >= date){
+            return res.status(400).json({message: "Cant set past event"})
+        }
+
         const user = await User.findById(userId)
 
 
@@ -176,11 +184,25 @@ export const editEvent = async (req, res) =>{
 
     try{
 
-        const {id, name, isActive, location, date, description} = req.body
+        const {id, name, isActive, location,oldDate, date, description} = req.body
 
         if(name.length < 2 || date === null){
             return res.status(400).json({message: "name must be at least 2"})
         }
+
+
+        if(date.slice(0,16) !== oldDate.slice(0,16)){
+            const now = new Date()
+
+            const nowDate = `${now.getFullYear()}-${now.getMonth()<10 && '0'}${now.getMonth()+1}-${now.getDate()-1}T${now.getHours()}:${now.getMinutes()}:00.000+00:00`
+
+            if(nowDate >= date){
+                return res.status(400).json({message: "Cant set past event"})
+            }
+        }
+
+
+
 
         const newEvent = await Event.findByIdAndUpdate(id, {
             name: name,
